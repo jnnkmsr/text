@@ -16,8 +16,6 @@
 
 package com.github.jnnkmsr.text.compose
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
 import com.github.jnnkmsr.text.IdTextResource
 import com.github.jnnkmsr.text.StringTextResource
 import com.github.jnnkmsr.text.TextResource
@@ -41,14 +39,3 @@ public fun TextResource.toUiTextResource(): UiTextResource = when (this) {
     is StringTextResource -> UiStringTextResource(value)
     is IdTextResource -> UiIdTextResource(value)
 }
-
-/**
- * Maps `this` [TextResource] to a [UiTextResource] and converts it into a
- * [String] that can be shown in the UI.
- *
- * @param args Format arguments for string resources.
- */
-@Composable
-@ReadOnlyComposable
-public fun TextResource.invoke(vararg args: Any): String =
-    toUiTextResource().invoke(*args)
