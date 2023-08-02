@@ -16,6 +16,7 @@
 
 package com.github.jnnkmsr.text.compose
 
+import android.content.Context
 import android.os.Parcelable
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
@@ -55,13 +56,23 @@ public fun UiTextResource(@StringRes id: Int): UiTextResource = UiIdTextResource
 public sealed interface UiTextResource : Parcelable {
 
     /**
-     * Converts `this` [UiTextResource] into a [String] that can be shown in the UI.
+     * Converts `this` [UiTextResource] into a [String] that can be shown in the
+     * UI.
      *
      * @param args Format arguments for string resources.
      */
     @Composable
     @ReadOnlyComposable
     public operator fun invoke(vararg args: Any): String
+
+    /**
+     * Converts `this` [UiTextResource] into a [String] that can be shown in the
+     * UI.
+     *
+     * @param context [Context] providing access to the string resources.
+     * @param args Format arguments for string resources.
+     */
+    public operator fun invoke(context: Context, vararg args: Any): String
 }
 
 /** [UiTextResource] wrapper for string text. */
@@ -74,6 +85,8 @@ internal value class UiStringTextResource(
     @Composable
     @ReadOnlyComposable
     override fun invoke(vararg args: Any): String = value
+
+    override fun invoke(context: Context, vararg args: Any): String = value
 }
 
 /** [UiTextResource] wrapper for string resources. */
@@ -86,4 +99,7 @@ internal value class UiIdTextResource internal constructor(
     @Composable
     @ReadOnlyComposable
     override fun invoke(vararg args: Any): String = stringResource(value, *args)
+
+    override fun invoke(context: Context, vararg args: Any): String =
+        context.resources.getString(value, *args)
 }
