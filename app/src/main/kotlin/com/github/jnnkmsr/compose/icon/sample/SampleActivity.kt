@@ -25,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
-import com.github.jnnkmsr.compose.icon.sample.ui.AnimatedIconDemo
 import com.github.jnnkmsr.compose.icon.sample.ui.theme.UiTheme
 
 class SampleActivity : ComponentActivity() {
@@ -42,7 +41,6 @@ class SampleActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center,
                 ) {
-                    AnimatedIconDemo()
                 }
             }
         }
